@@ -15,6 +15,8 @@ import { CompetenciaAreaModule } from './competencia-area/competencia-area.modul
 import { BnccFundamentalModule } from './bncc-fundamental/bncc-fundamental.module';
 import { BnccInfantilModule } from './bncc-infantil/bncc-infantil.module';
 import { BnccMedioModule } from './bncc-medio/bncc-medio.module';
+import { AuthModule } from './auth/auth.module';
+import { UsuariosModule } from './usuarios/usuarios.module';
 
 @Module({
   imports: [
@@ -32,6 +34,8 @@ import { BnccMedioModule } from './bncc-medio/bncc-medio.module';
     BnccFundamentalModule,
     BnccInfantilModule,
     BnccMedioModule,
+    AuthModule,
+    UsuariosModule,
   ],
   controllers: [AppController],
   providers: [AppService],
