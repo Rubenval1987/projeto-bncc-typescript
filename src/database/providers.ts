@@ -11,6 +11,7 @@ import { Etapas } from './entities/etapas.entity';
 import { BnccMedio } from './entities/bncc-medio.entity';
 import { BnccInfantil } from './entities/bncc-infantil.entity';
 import { BnccFundamental } from './entities/bncc-fundamental.entity';
+import { Usuarios } from './entities/usuarios.entity';
 
 export const Providers = [
   {
@@ -91,6 +92,12 @@ export const Providers = [
   {
     provide: 'ETAPAS_REPOSITORY',
     useFactory: (dataSource: DataSource) => dataSource.getRepository(Etapas),
+    inject: ['DATA_SOURCE'],
+  },
+
+  {
+    provide: 'USUARIOS_REPOSITORY',
+    useFactory: (dataSource: DataSource) => dataSource.getRepository(Usuarios),
     inject: ['DATA_SOURCE'],
   },
 ];

@@ -28,19 +28,14 @@ export class AreaConhecimentosController {
   }
 
   @Get(':id_areaconhecimento')
-  async findOne(
-    @Param('id_areaconhecimento')
-    id_areaconhecimento: number,
-  ) {
+  async findOne(@Param('id_areaconhecimento') id_areaconhecimento: number) {
     return this.areaConhecimentosService.findOne(id_areaconhecimento);
   }
 
   @Patch(':id_areaconhecimento')
   async update(
-    @Param('id_areaconhecimento')
-    id_areaconhecimento: number,
-    @Body()
-    updateAreaConhecimentosDto: UpdateAreaConhecimentosDto,
+    @Param('id_areaconhecimento') id_areaconhecimento: number,
+    @Body() updateAreaConhecimentosDto: UpdateAreaConhecimentosDto,
   ) {
     return this.areaConhecimentosService.update(
       id_areaconhecimento,
@@ -49,10 +44,7 @@ export class AreaConhecimentosController {
   }
 
   @Delete(':id_areaconhecimento')
-  async delete(
-    @Param('id_areaconhecimento')
-    id_areaconhecimento: number,
-  ) {
+  async delete(@Param('id_areaconhecimento') id_areaconhecimento: number) {
     return this.areaConhecimentosService.delete(id_areaconhecimento);
   }
 }
