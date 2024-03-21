@@ -1,6 +1,6 @@
 import { IsEmail, IsNumber, IsString, MinLength } from 'class-validator';
 
-export class CreateUsuariosDto {
+export class AuthRegisterDto {
   @IsNumber()
   id_usuario: number;
 
