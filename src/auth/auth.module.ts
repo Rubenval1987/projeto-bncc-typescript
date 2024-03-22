@@ -3,11 +3,13 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UsuariosModule } from 'src/usuarios/usuarios.module';
+import { DataSource } from 'typeorm';
 
 @Module({
   imports: [
     JwtModule.register({ secret: String(process.env.JWT_SECRET) }),
     UsuariosModule,
+    DataSource,
   ],
   controllers: [AuthController],
   providers: [AuthService],
