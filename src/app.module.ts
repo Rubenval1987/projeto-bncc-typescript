@@ -17,10 +17,23 @@ import { BnccInfantilModule } from './bncc-infantil/bncc-infantil.module';
 import { BnccMedioModule } from './bncc-medio/bncc-medio.module';
 import { AuthModule } from './auth/auth.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
+      entities: [`${__dirname}/database/entities/{.ts,*.js}`],
+      synchronize: false,
+      migrations: [`${__dirname}/database/migrations/{.ts,*.js}`],
+      migrationsRun: true,
+    }),
     DatabaseModule,
     AreaConhecimentosModule,
     ComponentesModule,
@@ -39,6 +52,5 @@ import { UsuariosModule } from './usuarios/usuarios.module';
   ],
   controllers: [AppController],
   providers: [AppService],
-  exports: [AppService],
 })
 export class AppModule {}

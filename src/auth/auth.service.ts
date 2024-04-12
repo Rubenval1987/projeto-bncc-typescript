@@ -13,9 +13,6 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class AuthService {
-  private issuer = 'login';
-  private audience = 'usuarios';
-
   constructor(
     private readonly jwtService: JwtService,
     private readonly usuariosService: UsuariosService,
@@ -34,8 +31,8 @@ export class AuthService {
         {
           expiresIn: '7 days',
           subject: String(usuario.id_usuario),
-          issuer: this.issuer,
-          audience: this.audience,
+          issuer: 'login',
+          audience: 'usuarios',
         },
       ),
     };
@@ -44,8 +41,8 @@ export class AuthService {
   checkToken(token: string) {
     try {
       const data = this.jwtService.verify(token, {
-        issuer: this.issuer,
-        audience: this.audience,
+        issuer: 'login',
+        audience: 'usuarios',
       });
 
       return data;
@@ -64,6 +61,7 @@ export class AuthService {
   }
 
   async login(email: string, senha: string) {
+    console.log(process.env);
     const usuario = await this.usuariosRepository.findOne({
       where: {
         email,
@@ -101,7 +99,7 @@ export class AuthService {
       },
     );
 
-    return true;
+    return token;
   }
 
   async reset(senha: string, token: string) {
