@@ -6,7 +6,6 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { UsuariosService } from 'src/usuarios/usuarios.service';
 import { AuthRegisterDto } from './dto/auth-register.dto';
-import { CreateUsuariosDto } from 'src/usuarios/dto/create.usuarios.dto';
 import { Usuarios } from 'src/database/entities/usuarios.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -77,10 +76,8 @@ export class AuthService {
   }
 
   async forget(email: string) {
-    const usuario = await this.usuariosRepository.findOne({
-      where: {
-        email,
-      },
+    const usuario = await this.usuariosRepository.findOneBy({
+      email,
     });
 
     if (!usuario) {
@@ -106,7 +103,7 @@ export class AuthService {
     try {
       const data: any = this.jwtService.verify(token, {
         issuer: 'forget',
-        audience: 'students',
+        audience: 'usuarios',
       });
 
       if (isNaN(Number(data.id_usuario))) {
@@ -128,16 +125,8 @@ export class AuthService {
   }
 
   async register(data: AuthRegisterDto) {
-    const createUsuariosData: CreateUsuariosDto = {
-      id_usuario: data.id_usuario,
-      usuario: data.usuario,
-      email: data.email,
-      senha: data.senha,
-      token: data.token,
-    };
+    const user = await this.usuariosService.create(data);
 
-    const usuario = await this.usuariosService.create(createUsuariosData);
-
-    return this.createToken(usuario);
+    return this.createToken(user);
   }
 }

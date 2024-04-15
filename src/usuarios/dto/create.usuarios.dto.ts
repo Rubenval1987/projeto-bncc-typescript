@@ -13,7 +13,4 @@ export class CreateUsuariosDto {
   @IsString()
   @MinLength(6)
   senha: string;
-
-  @IsString()
-  token: string;
 }

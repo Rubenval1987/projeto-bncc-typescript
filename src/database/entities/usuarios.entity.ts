@@ -13,7 +13,4 @@ export class Usuarios {
 
   @Column()
   senha: string;
-
-  @Column()
-  token: string;
 }

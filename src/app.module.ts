@@ -52,5 +52,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   ],
   controllers: [AppController],
   providers: [AppService],
+  exports: [AppService],
 })
 export class AppModule {}
