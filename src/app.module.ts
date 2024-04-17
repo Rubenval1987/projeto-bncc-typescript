@@ -18,6 +18,19 @@ import { BnccMedioModule } from './bncc-medio/bncc-medio.module';
 import { AuthModule } from './auth/auth.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AreaConhecimentos } from './database/entities/area-conhecimentos.entity';
+import { BnccFundamental } from './database/entities/bncc-fundamental.entity';
+import { BnccInfantil } from './database/entities/bncc-infantil.entity';
+import { BnccMedio } from './database/entities/bncc-medio.entity';
+import { CamposExperiencia } from './database/entities/campos-experiencia.entity';
+import { CompetenciaArea } from './database/entities/competencia-area.entity';
+import { CompetenciaComponente } from './database/entities/competencia-componente.entity';
+import { CompetenciaGeral } from './database/entities/competencia-geral.entity';
+import { Componentes } from './database/entities/componentes.entity';
+import { Cursos } from './database/entities/cursos.entity';
+import { DireitosAprendizagem } from './database/entities/direitos-aprendizagem.entity';
+import { Etapas } from './database/entities/etapas.entity';
+import { Usuarios } from './database/entities/usuarios.entity';
 
 @Module({
   imports: [
@@ -29,7 +42,21 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [`${__dirname}/database/entities/{.ts,*.js}`],
+      entities: [
+        AreaConhecimentos,
+        BnccFundamental,
+        BnccInfantil,
+        BnccMedio,
+        CamposExperiencia,
+        CompetenciaArea,
+        CompetenciaComponente,
+        CompetenciaGeral,
+        Componentes,
+        Cursos,
+        DireitosAprendizagem,
+        Etapas,
+        Usuarios,
+      ],
       synchronize: false,
       migrations: [`${__dirname}/database/migrations/{.ts,*.js}`],
       migrationsRun: true,

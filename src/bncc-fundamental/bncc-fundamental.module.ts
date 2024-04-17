@@ -8,5 +8,6 @@ import { BnccFundamentalController } from './bncc-fundamental.controller';
   imports: [DatabaseModule],
   controllers: [BnccFundamentalController],
   providers: [...Providers, BnccFundamentalService],
+  exports: [BnccFundamentalService],
 })
 export class BnccFundamentalModule {}

@@ -8,5 +8,6 @@ import { ComponentesService } from './componentes.service';
   imports: [DatabaseModule],
   controllers: [ComponentesController],
   providers: [...Providers, ComponentesService],
+  exports: [ComponentesService],
 })
 export class ComponentesModule {}

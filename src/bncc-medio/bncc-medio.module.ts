@@ -8,5 +8,6 @@ import { BnccMedioService } from './bncc-medio.service';
   imports: [DatabaseModule],
   controllers: [BnccMedioController],
   providers: [...Providers, BnccMedioService],
+  exports: [BnccMedioService],
 })
 export class BnccMedioModule {}

@@ -8,5 +8,6 @@ import { CompetenciaComponenteService } from './competencia-componente.service';
   imports: [DatabaseModule],
   controllers: [CompetenciaComponenteController],
   providers: [...Providers, CompetenciaComponenteService],
+  exports: [CompetenciaComponenteService],
 })
 export class CompetenciaComponenteModule {}

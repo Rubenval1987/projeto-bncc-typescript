@@ -8,5 +8,6 @@ import { DireitosAprendizagemService } from './direitos-aprendizagem.service';
   imports: [DatabaseModule],
   controllers: [DireitosAprendizagemController],
   providers: [...Providers, DireitosAprendizagemService],
+  exports: [DireitosAprendizagemService],
 })
 export class DireitosAprendizagemModule {}

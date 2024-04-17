@@ -8,5 +8,6 @@ import { BnccInfantilService } from './bncc-infantil.service';
   imports: [DatabaseModule],
   controllers: [BnccInfantilController],
   providers: [...Providers, BnccInfantilService],
+  exports: [BnccInfantilService],
 })
 export class BnccInfantilModule {}

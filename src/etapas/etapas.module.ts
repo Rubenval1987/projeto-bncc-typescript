@@ -8,5 +8,6 @@ import { EtapasController } from './etapas.controller';
   imports: [DatabaseModule],
   controllers: [EtapasController],
   providers: [...Providers, EtapasService],
+  exports: [EtapasService],
 })
 export class EtapasModule {}

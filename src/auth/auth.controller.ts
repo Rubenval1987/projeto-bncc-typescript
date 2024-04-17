@@ -4,10 +4,14 @@ import { AuthRegisterDto } from './dto/auth-register.dto';
 import { AuthForgetDto } from './dto/auth-forget.dto';
 import { AuthResetDto } from './dto/auth-reset.dto';
 import { AuthService } from './auth.service';
+import { UsuariosService } from 'src/usuarios/usuarios.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly usuariosService: UsuariosService,
+  ) {}
   @Post('login')
   async login(@Body() { email, senha }: AuthLoginDto) {
     return await this.authService.login(email, senha);

@@ -26,20 +26,20 @@ export class UsuariosController {
   }
 
   @Get(':id_usuario')
-  async findOne(@Param('id_usuario') id_usuario: number) {
+  async findOne(@Param() id_usuario: number) {
     return this.usuariosService.findOne(id_usuario);
   }
 
   @Patch(':id_usuario')
   async update(
-    @Param('id_usuario') id_usuario: number,
+    @Param() id_usuario: number,
     @Body() updateUsuariosDto: UpdateUsuariosDto,
   ) {
     return this.usuariosService.update(id_usuario, updateUsuariosDto);
   }
 
   @Delete(':id_usuario')
-  async delete(@Param('id_usuario') id_usuario: number) {
+  async delete(@Param() id_usuario: number) {
     return this.usuariosService.delete(id_usuario);
   }
 }

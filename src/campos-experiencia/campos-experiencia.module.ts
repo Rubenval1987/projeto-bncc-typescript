@@ -8,5 +8,6 @@ import { CamposExperienciaService } from './campos-experiencia.service';
   imports: [DatabaseModule],
   controllers: [CamposExperienciaController],
   providers: [...Providers, CamposExperienciaService],
+  exports: [CamposExperienciaService],
 })
 export class CamposExperienciaModule {}
