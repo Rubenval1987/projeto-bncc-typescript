@@ -23,9 +23,9 @@ export class DireitosAprendizagemService {
   }
 
   async findOne(id_direitoaprendizagem: any) {
-    const direitosAprendizagem = this.direitosAprendizagemRepository.findOne(
+    const direitosAprendizagem = this.direitosAprendizagemRepository.findOneBy({
       id_direitoaprendizagem,
-    );
+    });
     if (!direitosAprendizagem) {
       throw new Error('Direitos aprendizagem não encontrado!');
     }

@@ -23,8 +23,9 @@ export class CompetenciaAreaService {
   }
 
   async findOne(id_competencia: any) {
-    const competenciaArea =
-      this.competenciaAreaRepository.findOne(id_competencia);
+    const competenciaArea = this.competenciaAreaRepository.findOneBy({
+      id_competencia,
+    });
     if (!competenciaArea) {
       throw new Error('Competência não encontrada!');
     }

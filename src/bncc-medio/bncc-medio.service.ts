@@ -21,7 +21,7 @@ export class BnccMedioService {
   }
 
   async findOne(id_bncc: any) {
-    const bnccMedio = this.bnccMedioRepository.findOne(id_bncc);
+    const bnccMedio = this.bnccMedioRepository.findOneBy({ id_bncc });
     if (!bnccMedio) {
       throw new Error('BNCC médio não encontrada!');
     }

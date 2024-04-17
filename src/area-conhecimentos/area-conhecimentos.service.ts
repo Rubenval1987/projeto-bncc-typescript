@@ -23,8 +23,9 @@ export class AreaConhecimentosService {
   }
 
   async findOne(id_areaconhecimento: any) {
-    const areaConhecimentos =
-      this.areaConhecimentosRepository.findOne(id_areaconhecimento);
+    const areaConhecimentos = this.areaConhecimentosRepository.findOneBy({
+      id_areaconhecimento,
+    });
     if (!areaConhecimentos) {
       throw new Error('Área do conhecimento não encontrada!');
     }

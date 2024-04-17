@@ -21,7 +21,7 @@ export class CursosService {
   }
 
   async findOne(id_curso: any) {
-    const cursos = this.cursosRepository.findOne(id_curso);
+    const cursos = this.cursosRepository.findOneBy({ id_curso });
     if (!cursos) {
       throw new Error('Curso não encontrado!');
     }

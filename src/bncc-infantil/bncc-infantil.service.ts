@@ -23,7 +23,7 @@ export class BnccInfantilService {
   }
 
   async findOne(id_bncc: any) {
-    const bnccInfantil = this.bnccInfantilRepository.findOne(id_bncc);
+    const bnccInfantil = this.bnccInfantilRepository.findOneBy({ id_bncc });
     if (!bnccInfantil) {
       throw new Error('BNCC Infantil não encontrada!');
     }

@@ -21,7 +21,9 @@ export class UsuariosService {
   }
 
   async findOne(id_usuario: any) {
-    const usuarios = this.usuariosRepository.findOne(id_usuario);
+    const usuarios = this.usuariosRepository.findOneBy({
+      id_usuario,
+    });
     if (!usuarios) {
       throw new Error('Nenhum usuário foi encontrado com esse índice!');
     }

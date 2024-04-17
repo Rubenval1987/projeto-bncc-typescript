@@ -21,7 +21,7 @@ export class EtapasService {
   }
 
   async findOne(id_etapa: any) {
-    const etapas = await this.etapasRepository.findOne(id_etapa);
+    const etapas = await this.etapasRepository.findOneBy({ id_etapa });
     if (!etapas) {
       throw new Error('Etapa não encontrada!');
     }

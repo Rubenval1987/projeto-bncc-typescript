@@ -23,8 +23,9 @@ export class CamposExperienciaService {
   }
 
   async findOne(id_campoexperiencia: any) {
-    const camposExperiencia =
-      this.camposExperienciaRepository.findOne(id_campoexperiencia);
+    const camposExperiencia = this.camposExperienciaRepository.findOneBy({
+      id_campoexperiencia,
+    });
     if (!camposExperiencia) {
       throw new Error('Campo de experiência não encontrado!');
     }

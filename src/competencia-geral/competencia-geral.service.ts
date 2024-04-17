@@ -23,8 +23,9 @@ export class CompetenciaGeralService {
   }
 
   async findOne(id_competencia: any) {
-    const competenciaGeral =
-      this.competenciaGeralRepository.findOne(id_competencia);
+    const competenciaGeral = this.competenciaGeralRepository.findOneBy({
+      id_competencia,
+    });
     if (!competenciaGeral) {
       throw new Error('Competência geral não encontrada!');
     }

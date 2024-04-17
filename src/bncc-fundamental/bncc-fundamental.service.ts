@@ -23,7 +23,9 @@ export class BnccFundamentalService {
   }
 
   async findOne(id_bncc: any) {
-    const bnccFundamental = this.bnccFundamentalRepository.findOne(id_bncc);
+    const bnccFundamental = this.bnccFundamentalRepository.findOneBy({
+      id_bncc,
+    });
     if (!bnccFundamental) {
       throw new Error('BNCC Fundamental não encontrada!');
     }

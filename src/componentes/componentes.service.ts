@@ -21,7 +21,7 @@ export class ComponentesService {
   }
 
   async findOne(id_componente: any) {
-    const componentes = this.componentesRepository.findOne(id_componente);
+    const componentes = this.componentesRepository.findOneBy({ id_componente });
     if (!componentes) {
       throw new Error('Componente não encontrado!');
     }
