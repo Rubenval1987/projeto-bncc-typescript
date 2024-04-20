@@ -12,7 +12,7 @@ export class BnccInfantilService {
   ) {}
 
   async create(createBnccInfantilDto: CreateBnccInfantilDto) {
-    const bnccInfantil = this.bnccInfantilRepository.create(
+    const bnccInfantil = await this.bnccInfantilRepository.create(
       createBnccInfantilDto,
     );
     return this.bnccInfantilRepository.save(bnccInfantil);
@@ -22,20 +22,24 @@ export class BnccInfantilService {
     return this.bnccInfantilRepository.find();
   }
 
-  async findOne(id_bncc: any) {
-    const bnccInfantil = this.bnccInfantilRepository.findOneBy({ id_bncc });
+  async findOne(id_bncc: number) {
+    const bnccInfantil = await this.bnccInfantilRepository.findOne({
+      where: { id_bncc },
+    });
     if (!bnccInfantil) {
       throw new Error('BNCC Infantil não encontrada!');
     }
     return bnccInfantil;
   }
 
-  async update(id_bncc: any, updateBnccInfantilDto: UpdateBnccInfantilDto) {
+  async update(id_bncc: number, updateBnccInfantilDto: UpdateBnccInfantilDto) {
     return this.bnccInfantilRepository.update(id_bncc, updateBnccInfantilDto);
   }
 
-  async delete(id_bncc: any) {
-    const bnccInfantil = this.bnccInfantilRepository.find(id_bncc);
+  async delete(id_bncc: number) {
+    const bnccInfantil = await this.bnccInfantilRepository.findOne({
+      where: { id_bncc },
+    });
     if (!bnccInfantil) {
       throw new Error('BNCC Infantil não encontrada!');
     }

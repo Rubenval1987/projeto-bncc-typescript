@@ -12,7 +12,7 @@ export class BnccFundamentalService {
   ) {}
 
   async create(createBnccFundamentalDto: CreateBnccFundamentalDto) {
-    const bnccFundamental = this.bnccFundamentalRepository.create(
+    const bnccFundamental = await this.bnccFundamentalRepository.create(
       createBnccFundamentalDto,
     );
     return this.bnccFundamentalRepository.save(bnccFundamental);
@@ -22,9 +22,11 @@ export class BnccFundamentalService {
     return this.bnccFundamentalRepository.find();
   }
 
-  async findOne(id_bncc: any) {
-    const bnccFundamental = this.bnccFundamentalRepository.findOneBy({
-      id_bncc,
+  async findOne(id_bncc: number) {
+    const bnccFundamental = await this.bnccFundamentalRepository.findOne({
+      where: {
+        id_bncc,
+      },
     });
     if (!bnccFundamental) {
       throw new Error('BNCC Fundamental não encontrada!');
@@ -33,7 +35,7 @@ export class BnccFundamentalService {
   }
 
   async update(
-    id_bncc: any,
+    id_bncc: number,
     updateBnccFundamentalDto: UpdateBnccFundamentalDto,
   ) {
     return this.bnccFundamentalRepository.update(
@@ -42,8 +44,12 @@ export class BnccFundamentalService {
     );
   }
 
-  async delete(id_bncc: any) {
-    const bnccFundamental = this.bnccFundamentalRepository.find(id_bncc);
+  async delete(id_bncc: number) {
+    const bnccFundamental = await this.bnccFundamentalRepository.findOne({
+      where: {
+        id_bncc,
+      },
+    });
     if (!bnccFundamental) {
       throw new Error('BNCC Fundamental não encontrada!');
     }

@@ -12,7 +12,7 @@ export class BnccMedioService {
   ) {}
 
   async create(createBnccMedioDto: CreateBnccMedioDto) {
-    const bnccMedio = this.bnccMedioRepository.create(createBnccMedioDto);
+    const bnccMedio = await this.bnccMedioRepository.create(createBnccMedioDto);
     return this.bnccMedioRepository.save(bnccMedio);
   }
 
@@ -20,20 +20,24 @@ export class BnccMedioService {
     return this.bnccMedioRepository.find();
   }
 
-  async findOne(id_bncc: any) {
-    const bnccMedio = this.bnccMedioRepository.findOneBy({ id_bncc });
+  async findOne(id_bncc: number) {
+    const bnccMedio = await this.bnccMedioRepository.findOne({
+      where: { id_bncc },
+    });
     if (!bnccMedio) {
       throw new Error('BNCC médio não encontrada!');
     }
     return bnccMedio;
   }
 
-  async update(id_bncc: any, updateBnccMedioDto: UpdateBnccMedioDto) {
+  async update(id_bncc: number, updateBnccMedioDto: UpdateBnccMedioDto) {
     return this.bnccMedioRepository.update(id_bncc, updateBnccMedioDto);
   }
 
-  async delete(id_bncc: any) {
-    const bnccMedio = this.bnccMedioRepository.find(id_bncc);
+  async delete(id_bncc: number) {
+    const bnccMedio = await this.bnccMedioRepository.findOne({
+      where: { id_bncc },
+    });
     if (!bnccMedio) {
       throw new Error('BNCC médio não encontrada!');
     }

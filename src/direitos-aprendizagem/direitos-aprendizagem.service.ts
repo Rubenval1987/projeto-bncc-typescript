@@ -12,7 +12,7 @@ export class DireitosAprendizagemService {
   ) {}
 
   async create(createDireitosAprendizagemDto: CreateDireitosAprendizagemDto) {
-    const direitosAprendizagem = this.direitosAprendizagemRepository.create(
+    const direitosAprendizagem = await this.direitosAprendizagemRepository.create(
       createDireitosAprendizagemDto,
     );
     return this.direitosAprendizagemRepository.create(direitosAprendizagem);
@@ -22,9 +22,11 @@ export class DireitosAprendizagemService {
     return this.direitosAprendizagemRepository.find();
   }
 
-  async findOne(id_direitoaprendizagem: any) {
-    const direitosAprendizagem = this.direitosAprendizagemRepository.findOneBy({
-      id_direitoaprendizagem,
+  async findOne(id_direitoaprendizagem: number) {
+    const direitosAprendizagem = await this.direitosAprendizagemRepository.findOne({
+      where: {
+        id_direitoaprendizagem,
+      },
     });
     if (!direitosAprendizagem) {
       throw new Error('Direitos aprendizagem não encontrado!');
@@ -33,7 +35,7 @@ export class DireitosAprendizagemService {
   }
 
   async update(
-    id_direitoaprendizagem: any,
+    id_direitoaprendizagem: number,
     updateDireitosAprendizagemDto: UpdateDireitosAprendizagemDto,
   ) {
     return this.direitosAprendizagemRepository.update(
@@ -42,10 +44,12 @@ export class DireitosAprendizagemService {
     );
   }
 
-  async delete(id_direitoaprendizagem: any) {
-    const direitosAprendizagem = this.direitosAprendizagemRepository.find(
-      id_direitoaprendizagem,
-    );
+  async delete(id_direitoaprendizagem: number) {
+    const direitosAprendizagem = await this.direitosAprendizagemRepository.findOne({
+      where: {
+        id_direitoaprendizagem,
+      },
+    });
     if (!direitosAprendizagem) {
       throw new Error('Direitos aprendizagem não encontrado!');
     }

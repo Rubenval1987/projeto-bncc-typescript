@@ -12,7 +12,7 @@ export class CompetenciaGeralService {
   ) {}
 
   async create(createCompetenciaGeralDto: CreateCompetenciaGeralDto) {
-    const competenciaGeral = this.competenciaGeralRepository.create(
+    const competenciaGeral = await this.competenciaGeralRepository.create(
       createCompetenciaGeralDto,
     );
     return this.competenciaGeralRepository.save(competenciaGeral);
@@ -22,9 +22,11 @@ export class CompetenciaGeralService {
     return this.competenciaGeralRepository.find();
   }
 
-  async findOne(id_competencia: any) {
-    const competenciaGeral = this.competenciaGeralRepository.findOneBy({
-      id_competencia,
+  async findOne(id_competencia: number) {
+    const competenciaGeral = await this.competenciaGeralRepository.findOne({
+      where: {
+        id_competencia,
+      },
     });
     if (!competenciaGeral) {
       throw new Error('Competência geral não encontrada!');
@@ -33,7 +35,7 @@ export class CompetenciaGeralService {
   }
 
   async update(
-    id_competencia: any,
+    id_competencia: number,
     updateCompetenciaGeralDto: UpdateCompetenciaGeralDto,
   ) {
     return this.competenciaGeralRepository.update(
@@ -42,9 +44,12 @@ export class CompetenciaGeralService {
     );
   }
 
-  async delete(id_competencia: any) {
-    const competenciaGeral =
-      this.competenciaGeralRepository.find(id_competencia);
+  async delete(id_competencia: number) {
+    const competenciaGeral = await this.competenciaGeralRepository.findOne({
+      where: {
+        id_competencia,
+      },
+    });
     if (!competenciaGeral) {
       throw new Error('Competência geral não encontrada!');
     }

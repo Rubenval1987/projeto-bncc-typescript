@@ -12,9 +12,10 @@ export class CompetenciaComponenteService {
   ) {}
 
   async create(createCompetenciaComponenteDto: CreateCompetenciaComponenteDto) {
-    const competenciaComponente = this.competenciaComponenteRepository.create(
-      createCompetenciaComponenteDto,
-    );
+    const competenciaComponente =
+      await this.competenciaComponenteRepository.create(
+        createCompetenciaComponenteDto,
+      );
     return this.competenciaComponenteRepository.save(competenciaComponente);
   }
 
@@ -22,9 +23,11 @@ export class CompetenciaComponenteService {
     return this.competenciaComponenteRepository.find();
   }
 
-  async findOne(id_competencia: any) {
+  async findOne(id_competencia: number) {
     const competenciaComponente =
-      this.competenciaComponenteRepository.findOneBy({ id_competencia });
+      await this.competenciaComponenteRepository.findOne({
+        where: { id_competencia },
+      });
     if (!competenciaComponente) {
       throw new Error('Competência componente não encontrada!');
     }
@@ -32,7 +35,7 @@ export class CompetenciaComponenteService {
   }
 
   async update(
-    id_competencia: any,
+    id_competencia: number,
     updateCompetenciaComponenteDto: UpdateCompetenciaComponenteDto,
   ) {
     return this.competenciaComponenteRepository.update(
@@ -41,9 +44,11 @@ export class CompetenciaComponenteService {
     );
   }
 
-  async delete(id_competencia: any) {
+  async delete(id_competencia: number) {
     const competenciaComponente =
-      this.competenciaComponenteRepository.find(id_competencia);
+      await this.competenciaComponenteRepository.findOne({
+        where: { id_competencia },
+      });
     if (!competenciaComponente) {
       throw new Error('Competência componente não encontrada!');
     }

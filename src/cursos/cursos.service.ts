@@ -12,7 +12,7 @@ export class CursosService {
   ) {}
 
   async create(createCursosDto: CreateCursosDto) {
-    const cursos = this.cursosRepository.create(createCursosDto);
+    const cursos = await this.cursosRepository.create(createCursosDto);
     return this.cursosRepository.save(cursos);
   }
 
@@ -20,20 +20,20 @@ export class CursosService {
     return this.cursosRepository.find();
   }
 
-  async findOne(id_curso: any) {
-    const cursos = this.cursosRepository.findOneBy({ id_curso });
+  async findOne(id_curso: number) {
+    const cursos = await this.cursosRepository.findOne({ where: { id_curso } });
     if (!cursos) {
       throw new Error('Curso não encontrado!');
     }
     return cursos;
   }
 
-  async update(id_curso: any, updateCursosDto: UpdateCursosDto) {
+  async update(id_curso: number, updateCursosDto: UpdateCursosDto) {
     return this.cursosRepository.update(id_curso, updateCursosDto);
   }
 
-  async delete(id_curso: any) {
-    const cursos = this.cursosRepository.find(id_curso);
+  async delete(id_curso: number) {
+    const cursos = await this.cursosRepository.findOne({ where: { id_curso } });
     if (!cursos) {
       throw new Error('Curso não encontrado!');
     }

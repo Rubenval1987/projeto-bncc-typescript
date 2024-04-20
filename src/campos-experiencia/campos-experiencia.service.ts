@@ -12,7 +12,7 @@ export class CamposExperienciaService {
   ) {}
 
   async create(createCamposExperienciaDto: CreateCamposExperienciaDto) {
-    const camposExperiencia = this.camposExperienciaRepository.create(
+    const camposExperiencia = await this.camposExperienciaRepository.create(
       createCamposExperienciaDto,
     );
     return this.camposExperienciaRepository.save(camposExperiencia);
@@ -22,9 +22,11 @@ export class CamposExperienciaService {
     return this.camposExperienciaRepository.find();
   }
 
-  async findOne(id_campoexperiencia: any) {
-    const camposExperiencia = this.camposExperienciaRepository.findOneBy({
-      id_campoexperiencia,
+  async findOne(id_campoexperiencia: number) {
+    const camposExperiencia = await this.camposExperienciaRepository.findOne({
+      where: {
+        id_campoexperiencia,
+      },
     });
     if (!camposExperiencia) {
       throw new Error('Campo de experiência não encontrado!');
@@ -33,7 +35,7 @@ export class CamposExperienciaService {
   }
 
   async update(
-    id_campoexperiencia: any,
+    id_campoexperiencia: number,
     updateCamposExperienciaDto: UpdateCamposExperienciaDto,
   ) {
     return this.camposExperienciaRepository.update(
@@ -42,9 +44,12 @@ export class CamposExperienciaService {
     );
   }
 
-  async delete(id_campoexperiencia: any) {
-    const camposExperiencia =
-      this.camposExperienciaRepository.find(id_campoexperiencia);
+  async delete(id_campoexperiencia: number) {
+    const camposExperiencia = await this.camposExperienciaRepository.findOne({
+      where: {
+        id_campoexperiencia,
+      },
+    });
     if (!camposExperiencia) {
       throw new Error('Campo de experiência não encontrado!');
     }

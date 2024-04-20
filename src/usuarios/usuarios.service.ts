@@ -12,7 +12,7 @@ export class UsuariosService {
   ) {}
 
   async create(createUsuariosDto: CreateUsuariosDto) {
-    const usuarios = this.usuariosRepository.create(createUsuariosDto);
+    const usuarios = await this.usuariosRepository.create(createUsuariosDto);
     return this.usuariosRepository.save(usuarios);
   }
 
@@ -20,9 +20,11 @@ export class UsuariosService {
     return this.usuariosRepository.find();
   }
 
-  async findOne(id_usuario: any) {
-    const usuarios = this.usuariosRepository.findOneBy({
-      id_usuario,
+  async findOne(id_usuario: number) {
+    const usuarios = await this.usuariosRepository.findOne({
+      where: {
+        id_usuario,
+      },
     });
     if (!usuarios) {
       throw new Error('Nenhum usuário foi encontrado com esse índice!');
@@ -30,12 +32,16 @@ export class UsuariosService {
     return usuarios;
   }
 
-  async update(id_usuario: any, updateUsuariosDto: UpdateUsuariosDto) {
+  async update(id_usuario: number, updateUsuariosDto: UpdateUsuariosDto) {
     return this.usuariosRepository.update(id_usuario, updateUsuariosDto);
   }
 
-  async delete(id_usuario: any) {
-    const usuarios = this.usuariosRepository.find(id_usuario);
+  async delete(id_usuario: number) {
+    const usuarios = await this.usuariosRepository.findOne({
+      where: {
+        id_usuario,
+      },
+    });
     if (!usuarios) {
       throw new Error('Nenhum usuário foi encontrado com esse índice!');
     }

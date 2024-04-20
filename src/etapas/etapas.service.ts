@@ -12,7 +12,7 @@ export class EtapasService {
   ) {}
 
   async create(createEtapasDto: CreateEtapasDto) {
-    const etapas = this.etapasRepository.create(createEtapasDto);
+    const etapas = await this.etapasRepository.create(createEtapasDto);
     return this.etapasRepository.save(etapas);
   }
 
@@ -20,20 +20,20 @@ export class EtapasService {
     return this.etapasRepository.find();
   }
 
-  async findOne(id_etapa: any) {
-    const etapas = await this.etapasRepository.findOneBy({ id_etapa });
+  async findOne(id_etapa: number) {
+    const etapas = await this.etapasRepository.findOne({ where: { id_etapa } });
     if (!etapas) {
       throw new Error('Etapa não encontrada!');
     }
     return etapas;
   }
 
-  async update(id_etapa: any, updateEtapasDto: UpdateEtapasDto) {
+  async update(id_etapa: number, updateEtapasDto: UpdateEtapasDto) {
     return this.etapasRepository.update(id_etapa, updateEtapasDto);
   }
 
-  async delete(id_etapa: any) {
-    const etapas = await this.etapasRepository.find(id_etapa);
+  async delete(id_etapa: number) {
+    const etapas = await this.etapasRepository.findOne({ where: { id_etapa } });
     if (!etapas) {
       throw new Error('Etapa não encontrada!');
     }

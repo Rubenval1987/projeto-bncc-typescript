@@ -76,8 +76,10 @@ export class AuthService {
   }
 
   async forget(email: string) {
-    const usuario = await this.usuariosRepository.findOneBy({
-      email,
+    const usuario = await this.usuariosRepository.findOne({
+      where: {
+        email,
+      },
     });
 
     if (!usuario) {
@@ -89,7 +91,7 @@ export class AuthService {
         id_usuario: usuario.id_usuario,
       },
       {
-        expiresIn: '30 minutes',
+        expiresIn: '60 minutes',
         subject: String(usuario.id_usuario),
         issuer: 'forget',
         audience: 'usuarios',
@@ -101,7 +103,7 @@ export class AuthService {
 
   async reset(senha: string, token: string) {
     try {
-      const data: any = this.jwtService.verify(token, {
+      const data: any = await this.jwtService.verify(token, {
         issuer: 'forget',
         audience: 'usuarios',
       });

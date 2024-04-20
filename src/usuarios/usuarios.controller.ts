@@ -26,7 +26,7 @@ export class UsuariosController {
   }
 
   @Get(':id_usuario')
-  async findOne(@Param() id_usuario: number) {
+  async findOne(@Param('id_usuario') id_usuario: number) {
     return this.usuariosService.findOne(id_usuario);
   }
 

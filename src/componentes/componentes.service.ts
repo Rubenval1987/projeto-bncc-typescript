@@ -12,7 +12,8 @@ export class ComponentesService {
   ) {}
 
   async create(createComponentesDto: CreateComponentesDto) {
-    const componentes = this.componentesRepository.create(createComponentesDto);
+    const componentes =
+      await this.componentesRepository.create(createComponentesDto);
     return this.componentesRepository.save(componentes);
   }
 
@@ -20,23 +21,30 @@ export class ComponentesService {
     return this.componentesRepository.find();
   }
 
-  async findOne(id_componente: any) {
-    const componentes = this.componentesRepository.findOneBy({ id_componente });
+  async findOne(id_componente: number) {
+    const componentes = await this.componentesRepository.findOne({
+      where: { id_componente },
+    });
     if (!componentes) {
       throw new Error('Componente não encontrado!');
     }
     return componentes;
   }
 
-  async update(id_componente: any, updateComponentesDto: UpdateComponentesDto) {
+  async update(
+    id_componente: number,
+    updateComponentesDto: UpdateComponentesDto,
+  ) {
     return this.componentesRepository.update(
       id_componente,
       updateComponentesDto,
     );
   }
 
-  async delete(id_componente: any) {
-    const componentes = this.componentesRepository.find(id_componente);
+  async delete(id_componente: number) {
+    const componentes = await this.componentesRepository.findOne({
+      where: { id_componente },
+    });
     if (!componentes) {
       throw new Error('Componente não encontrado!');
     }

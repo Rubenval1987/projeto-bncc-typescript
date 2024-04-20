@@ -12,7 +12,7 @@ export class AreaConhecimentosService {
   ) {}
 
   async create(createAreaConhecimentosDto: CreateAreaConhecimentosDto) {
-    const areaConhecimentos = this.areaConhecimentosRepository.create(
+    const areaConhecimentos = await this.areaConhecimentosRepository.create(
       createAreaConhecimentosDto,
     );
     return this.areaConhecimentosRepository.save(areaConhecimentos);
@@ -22,9 +22,11 @@ export class AreaConhecimentosService {
     return this.areaConhecimentosRepository.find();
   }
 
-  async findOne(id_areaconhecimento: any) {
-    const areaConhecimentos = this.areaConhecimentosRepository.findOneBy({
-      id_areaconhecimento,
+  async findOne(id_areaconhecimento: number) {
+    const areaConhecimentos = await this.areaConhecimentosRepository.findOne({
+      where: {
+        id_areaconhecimento,
+      },
     });
     if (!areaConhecimentos) {
       throw new Error('Área do conhecimento não encontrada!');
@@ -33,7 +35,7 @@ export class AreaConhecimentosService {
   }
 
   async update(
-    id_areaconhecimento: any,
+    id_areaconhecimento: number,
     updateAreaConhecimentosDto: UpdateAreaConhecimentosDto,
   ) {
     return this.areaConhecimentosRepository.update(
@@ -42,9 +44,12 @@ export class AreaConhecimentosService {
     );
   }
 
-  async delete(id_areaconhecimento: any) {
-    const areaConhecimentos =
-      this.areaConhecimentosRepository.find(id_areaconhecimento);
+  async delete(id_areaconhecimento: number) {
+    const areaConhecimentos = await this.areaConhecimentosRepository.findOne({
+      where: {
+        id_areaconhecimento,
+      },
+    });
     if (!areaConhecimentos) {
       throw new Error('Área do conhecimento não encontrada!');
     }
